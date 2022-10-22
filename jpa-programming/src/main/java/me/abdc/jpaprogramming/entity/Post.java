@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter @Setter @ToString
+@Getter @Setter @ToString(exclude = "comments")
 @Entity
 public class Post {
 

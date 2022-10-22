@@ -17,7 +17,7 @@ class PostTest {
 
     @PersistenceContext
     EntityManager entityManager;
-
+    
     @Test @Rollback(false)
     void cascade() {
         Post post = new Post();
@@ -36,4 +36,38 @@ class PostTest {
         
         session.delete(post);
     }
+
+    @Test @Rollback(false)
+    void fetch() {
+        Session session = entityManager.unwrap(Session.class);
+        Post post = session.get(Post.class, 1L);
+        System.out.println("======================");
+        System.out.println(post);
+        post.getComments().forEach(c -> {
+            System.out.println("-------------------");
+            System.out.println(c);
+        });
+
+        Comment comment = session.get(Comment.class, 188L);
+        System.out.println("======================");
+        System.out.println(comment);
+    }
+
+    void initSampleData() {
+        Session session = entityManager.unwrap(Session.class);
+
+        for (int i = 0; i < 50; i++) {
+            Post post = new Post();
+            post.setTitle("샘플용 게시물" + i);
+
+            for (int j = 0; j < 5; j++) {
+                Comment comment = new Comment();
+                comment.setComment("댓글[" + i + "/" + j + "]");
+                post.addComment(comment);
+            }
+            session.save(post);
+        }
+    }
+
+
 }
