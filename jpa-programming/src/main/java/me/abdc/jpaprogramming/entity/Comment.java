@@ -8,13 +8,13 @@ import javax.persistence.*;
 
 @Getter @Setter @ToString
 @Entity
-public class Study {
+public class Comment {
 
     @Id @GeneratedValue
     private Long id;
 
-    private String name;
+    private String comment;
 
     @ManyToOne
-    private Account owner;
+    private Post post;
 }

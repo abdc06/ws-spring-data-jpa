@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 public class Account {
 
-    @Id @GeneratedValue(strategy = GenerationType.TABLE)
+    @Id @GeneratedValue
     private Long id;
 
     @Column(nullable = false, unique = true)
