@@ -6,6 +6,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter @Setter @ToString
 @Entity
@@ -28,4 +30,17 @@ public class Account {
 
     @Transient
     private String useYn;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Study> studies = new HashSet<>();
+
+    public void addStudy(Study study) {
+        study.setOwner(this);
+        studies.add(study);
+    }
+
+    public void removeStudy(Study study) {
+        study.setOwner(null);
+        studies.remove(study);
+    }
 }
