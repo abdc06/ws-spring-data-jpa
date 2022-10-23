@@ -53,6 +53,7 @@ class PostTest {
         System.out.println(comment);
     }
 
+    @Test @Rollback(false)
     void initSampleData() {
         Session session = entityManager.unwrap(Session.class);
 
