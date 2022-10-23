@@ -17,7 +17,7 @@ class PostTest {
 
     @PersistenceContext
     EntityManager entityManager;
-    
+
     @Test @Rollback(false)
     void cascade() {
         Post post = new Post();
