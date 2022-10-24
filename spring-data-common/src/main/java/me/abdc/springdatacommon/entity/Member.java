@@ -26,5 +26,7 @@ public class Member {
 
     private String phone;
 
+    private Integer age;
+
     private LocalDateTime createdOn;
 }

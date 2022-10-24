@@ -52,6 +52,7 @@ public class AppRunner implements ApplicationRunner {
                     .memberId(RandomStringUtils.randomAlphanumeric(10))
                     .memberName(randomHangleName())
                     .phone("010" + RandomStringUtils.randomNumeric(8))
+                    .age(RandomUtils.nextInt(11, 50))
                     .createdOn(LocalDateTime.now())
                     .build());
         }
