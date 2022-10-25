@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.stream.IntStream;
+
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,7 +55,27 @@ class PostControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content[0].title", is("JPA")));
+    }
 
+    @Test
+    void getHateoasPosts() throws Exception {
+        createPosts();
+
+        mockMvc.perform(get("/hateoasPosts")
+                        .param("page", "0")
+                        .param("size", "10")
+                        .param("sort", "createdOn,desc")
+                        .param("sort", "title"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    private void createPosts() {
+        IntStream.range(0, 100).forEach(i -> {
+            Post post = new Post();
+            post.setTitle("JPA");
+            postRepository.save(post);
+        });
     }
 
 }
