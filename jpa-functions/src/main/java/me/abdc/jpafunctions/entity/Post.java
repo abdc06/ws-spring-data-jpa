@@ -11,6 +11,8 @@ public class Post {
 
     private String title;
 
+    private int hits;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
 
@@ -28,6 +30,14 @@ public class Post {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
     }
 
     public Date getCreatedOn() {
