@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,5 +43,44 @@ class PostsRepositoryTest {
 
         List<Post> all = postRepository.findAll();
         assertThat(all.size()).isEqualTo(1);
+    }
+
+    @Test
+    void findByTitleStartsWith() {
+        savePost();
+
+        List<Post> all = postRepository.findByTitleStartsWith("Spring");
+        assertThat(all.size()).isEqualTo(1);
+    }
+
+    @Test
+    void findByHitsGreaterThanEqual() {
+        savePost();
+
+        List<Post> all = postRepository.findByHitsGreaterThanEqual(5);
+        assertThat(all.size()).isEqualTo(1);
+    }
+
+    @Test
+    void findByTitleIsNotNull() {
+        savePost();
+
+        List<Post> all = postRepository.findByTitleIsNotNull();
+        assertThat(all.size()).isEqualTo(1);
+    }
+
+    @Test
+    void findByTitleIgnoreCase() {
+        savePost();
+
+        Optional<Post> post = postRepository.findByTitleIgnoreCase("spRIng DaTa JPa");
+        assertThat(post.get()).isNotNull();
+    }
+
+    private void savePost() {
+        Post post = new Post();
+        post.setTitle("Spring Data JPA");
+        post.setHits(10);
+        postRepository.save(post);
     }
 }
