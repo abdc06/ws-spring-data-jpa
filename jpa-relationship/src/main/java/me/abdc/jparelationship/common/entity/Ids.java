@@ -23,4 +23,7 @@ public class Ids {
     @Transient public final static String BOARD = "BOARD";
     @Transient public final static String POST = "POST";
     @Transient public final static String COMMENT = "COMMENT";
+    @Transient public final static String BBS = "BBS";
+    @Transient public final static String NTT = "NTT";
+    @Transient public final static String REPLY = "REPLY";
 }
