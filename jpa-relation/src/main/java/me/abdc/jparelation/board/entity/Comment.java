@@ -1,6 +1,7 @@
 package me.abdc.jparelation.board.entity;
 
 import lombok.Data;
+import me.abdc.jparelation.common.entity.Member;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,6 +19,10 @@ public class Comment {
     private String comment;
 
     private LocalDateTime created = LocalDateTime.now();
+
+    @ManyToOne
+    @JoinColumn(name = "ownerId")
+    private Member owner;
 
     @ManyToOne
     @JoinColumn(name = "postId")

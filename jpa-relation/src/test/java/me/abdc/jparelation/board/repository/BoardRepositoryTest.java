@@ -4,6 +4,8 @@ import me.abdc.jparelation.board.entity.Board;
 import me.abdc.jparelation.board.entity.Comment;
 import me.abdc.jparelation.board.entity.Post;
 import me.abdc.jparelation.common.entity.Ids;
+import me.abdc.jparelation.common.entity.Member;
+import me.abdc.jparelation.common.repository.MemberRepository;
 import me.abdc.jparelation.common.service.IdsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,8 @@ class BoardRepositoryTest {
     PostRepository postRepository;
     @Autowired
     CommentRepository commentRepository;
-
+    @Autowired
+    MemberRepository memberRepository;
     @Test
     void create() {
         init();
@@ -42,6 +45,13 @@ class BoardRepositoryTest {
     }
 
     void init() {
+        Member member = new Member();
+        member.setMemberId("kim123");
+        member.setMemberNm("김태호");
+        member.setEmail("abdc2806@gmail.com");
+        member.setPhone("01012345678");
+        Member savedMember = memberRepository.save(member);
+
         Board board = new Board();
         board.setBoardId(idsService.getNextId(Ids.BOARD));
         board.setBoardNm("Notice");
@@ -52,6 +62,7 @@ class BoardRepositoryTest {
             post.setPostId(idsService.getNextId(Ids.POST));
             post.setTitle("hibernate" + i);
             post.setBoard(savedBoard);
+            post.setOwner(savedMember);
             Post savedPost = postRepository.save(post);
 
             IntStream.range(1, 4).forEach(j -> {
@@ -59,6 +70,7 @@ class BoardRepositoryTest {
                 comment.setCommentId(idsService.getNextId(Ids.COMMENT));
                 comment.setComment("comment/" + i + "/" + j);
                 comment.setPost(savedPost);
+                comment.setOwner(savedMember);
                 commentRepository.save(comment);
             });
         });
