@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 
 @Getter @Setter
@@ -18,4 +19,8 @@ public class Ids {
     private String tableName;
 
     private Long nextId;
+
+    @Transient public final static String BOARD = "BOARD";
+    @Transient public final static String POST = "POST";
+    @Transient public final static String COMMENT = "COMMENT";
 }
