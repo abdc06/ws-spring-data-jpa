@@ -4,6 +4,7 @@ import me.abdc.jpafunctions.entity.Post;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Sort;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -77,10 +78,30 @@ class PostsRepositoryTest {
         assertThat(post.get()).isNotNull();
     }
 
-    private void savePost() {
+    @Test
+    void sortedFindAll() {
+        savePost();
+
+        List<Post> title = postRepository.findAll(Sort.by("title"));
+        assertThat(title.size()).isEqualTo(1);
+    }
+
+    @Test
+    void updateTitle() {
+        Post post = savePost();
+
+        String hibernate = "hibernate";
+        int update = postRepository.updateTitle(hibernate, post.getId());
+        assertThat(update).isEqualTo(1);
+
+        Optional<Post> byId = postRepository.findById(post.getId());
+        assertThat(byId.get().getTitle()).isEqualTo(hibernate);
+    }
+
+    private Post savePost() {
         Post post = new Post();
         post.setTitle("Spring Data JPA");
         post.setHits(10);
-        postRepository.save(post);
+        return postRepository.save(post);
     }
 }
