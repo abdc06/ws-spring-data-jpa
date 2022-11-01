@@ -26,4 +26,7 @@ public class Ids {
     @Transient public final static String BBS = "BBS";
     @Transient public final static String NTT = "NTT";
     @Transient public final static String REPLY = "REPLY";
+    @Transient public final static String CODE_GRP = "CDA";
+    @Transient public final static String CODE_MST = "CDB";
+    @Transient public final static String CODE_DTL = "CDC";
 }
