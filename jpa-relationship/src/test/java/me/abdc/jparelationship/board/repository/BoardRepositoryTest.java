@@ -32,8 +32,8 @@ class BoardRepositoryTest {
     @Autowired
     MemberRepository memberRepository;
     @Test
-    void create() {
-        init();
+    void init() {
+        setData();
 
         List<Board> boards = boardRepository.findAll();
         List<Post> posts = postRepository.findAll();
@@ -44,7 +44,7 @@ class BoardRepositoryTest {
         assertThat(comments.size()).isEqualTo(12);
     }
 
-    void init() {
+    void setData() {
         Member member = new Member();
         member.setMemberId("kim123");
         member.setMemberNm("김태호");

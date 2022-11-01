@@ -29,8 +29,8 @@ class BbsRepositoryTest {
     ReplyRepository replyRepository;
 
     @Test
-    void create() {
-        init();
+    void init() {
+        setData();
 
         List<Bbs> boards = bbsRepository.findAll();
         List<Ntt> posts = nttRepository.findAll();
@@ -41,7 +41,7 @@ class BbsRepositoryTest {
         assertThat(comments.size()).isEqualTo(12);
     }
 
-    void init() {
+    void setData() {
         Bbs bbs = new Bbs();
         bbs.setBbsId(idsService.getNextId(Ids.BBS));
         bbs.setBbsNm("Notice");
