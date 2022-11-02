@@ -1,4 +1,4 @@
-package me.abdc.jparelationship.common.entity;
+package me.abdc.jparelationship.member.entity;
 
 import lombok.Data;
 
