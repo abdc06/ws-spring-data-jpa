@@ -1,5 +1,6 @@
 package me.abdc.jparelationship.common.service;
 
+import me.abdc.jparelationship.common.TableName;
 import me.abdc.jparelationship.common.entity.Ids;
 import me.abdc.jparelationship.common.repository.IdsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ public class IdsService {
     @Autowired
     private IdsRepository idsRepository;
 
-    public String getNextId(String tableName) {
-        Optional<Ids> ids = idsRepository.findByTableNameIgnoreCase(tableName);
+    public String getNextId(TableName tableName) {
+        Optional<Ids> ids = idsRepository.findByTableName(tableName);
         Long nextId = 1L;
         if (ids.isPresent()) {
             nextId = ids.get().getNextId();

@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.abdc.jparelationship.common.TableName;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
 
 @Getter @Setter
@@ -16,17 +18,8 @@ import javax.persistence.Transient;
 public class Ids {
 
     @Id
-    private String tableName;
+    @Enumerated(value = EnumType.STRING)
+    private TableName tableName;
 
     private Long nextId;
-
-    @Transient public final static String BOARD = "BOARD";
-    @Transient public final static String POST = "POST";
-    @Transient public final static String COMMENT = "COMMENT";
-    @Transient public final static String BBS = "BBS";
-    @Transient public final static String NTT = "NTT";
-    @Transient public final static String REPLY = "REPLY";
-    @Transient public final static String CODE_GRP = "CDA";
-    @Transient public final static String CODE_MST = "CDB";
-    @Transient public final static String CODE_DTL = "CDC";
 }
